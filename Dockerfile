@@ -1,4 +1,4 @@
-FROM python:3.12.3-bullseye
+FROM python:3.12.6-bookworm
 
 RUN python -m pip install --upgrade pip
 

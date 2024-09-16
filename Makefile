@@ -1,4 +1,8 @@
 #---VARIABLES---------------------------------#
+#--CONTAINERS--#
+DJANGO_CONTAINER = django
+
+
 #---DOCKER---#
 DOCKER = docker
 DOCKER_RUN = $(DOCKER) run
@@ -9,17 +13,20 @@ DOCKER_COMPOSE_RUN = $(DOCKER_COMPOSE) run --rm
 DOCKER_COMPOSE_EXEC = $(DOCKER_COMPOSE) exec
 #------------#
 #---DJANGO--#
-DJANGO_ADMIN = $(DOCKER_COMPOSE_RUN) django-admin django-admin
-DJANGO_MANAGE = $(DOCKER_COMPOSE_EXEC) django python manage.py
+DJANGO_ADMIN = $(DOCKER_COMPOSE_RUN) $(DJANGO_CONTAINER) django-admin
+DJANGO_MANAGE = $(DOCKER_COMPOSE_EXEC) $(DJANGO_CONTAINER) python manage.py
 
 
 #---PIP-#
+PIP = $(DOCKER_COMPOSE_EXEC) $(DJANGO_CONTAINER) pip
 
+#---PyTest---#
+COVERAGE = $(DOCKER_COMPOSE_EXEC) $(DJANGO_CONTAINER) coverage run --source='.' manage.py
 
 
 ## === 🆘  HELP ==================================================
 help: ## Show this help.
-	@echo "Symfony-And-Docker-Makefile"
+	@echo "Django-And-Docker-Makefile"
 	@echo "---------------------------"
 	@echo "Usage: make [target]"
 	@echo ""
