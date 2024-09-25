@@ -24,6 +24,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
     networks:
       - default
     healthcheck:
@@ -31,3 +33,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      
+volumes:
+  postgres-db-volume:
